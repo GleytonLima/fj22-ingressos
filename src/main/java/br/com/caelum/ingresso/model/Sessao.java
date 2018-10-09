@@ -7,9 +7,18 @@ public class Sessao {
 	
 	private Long id;
 	
-	private LocalTime dataHora;
+	private LocalTime horario;
 	private Filme filme;
 	private Sala sala;
+	
+	
+	
+	public Sessao(LocalTime horario, Filme filme, Sala sala) {
+		super();
+		this.horario = horario;
+		this.filme = filme;
+		this.sala = sala;
+	}
 	
 	public Long getId() {
 		return id;
@@ -17,12 +26,15 @@ public class Sessao {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public LocalTime getDataHora() {
-		return dataHora;
+	
+	public LocalTime getHorario() {
+		return horario;
 	}
-	public void setDataHora(LocalTime dataHora) {
-		this.dataHora = dataHora;
+
+	public void setHorario(LocalTime horario) {
+		this.horario = horario;
 	}
+
 	public Filme getFilme() {
 		return filme;
 	}
@@ -36,6 +48,9 @@ public class Sessao {
 		this.sala = sala;
 	}
 	
+	public LocalTime getHorarioTermino() {
+		return this.horario.plusMinutes(filme.getDuracao().toMinutes());
+	}
 	
 	
 
