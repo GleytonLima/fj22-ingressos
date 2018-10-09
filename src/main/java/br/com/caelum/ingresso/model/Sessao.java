@@ -5,7 +5,7 @@ import java.time.LocalTime;
 public class Sessao {
 	
 	
-	private Long id;
+	private Integer id;
 	
 	private LocalTime horario;
 	private Filme filme;
@@ -14,16 +14,15 @@ public class Sessao {
 	
 	
 	public Sessao(LocalTime horario, Filme filme, Sala sala) {
-		super();
 		this.horario = horario;
 		this.filme = filme;
 		this.sala = sala;
 	}
 	
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	
