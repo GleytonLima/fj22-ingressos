@@ -23,8 +23,11 @@ public class Sessao {
 	@ManyToOne
 	private Sala sala;
 
+	/**
+	 * @deprecated Somente para o uso do Hibernate
+	 */
 	public Sessao() {
-
+		
 	}
 
 	public Sessao(LocalTime horario, Filme filme, Sala sala) {

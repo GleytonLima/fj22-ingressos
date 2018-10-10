@@ -1,6 +1,7 @@
 package br.com.caelum.ingresso.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -85,7 +86,7 @@ public class Sala {
 	}
 
 	public void setPreco(BigDecimal preco) {
-		this.preco = preco;
+		this.preco = preco.setScale(2, RoundingMode.HALF_UP);
 	}
 
 	public Map<String, List<Lugar>> getMapaDeLugares() {

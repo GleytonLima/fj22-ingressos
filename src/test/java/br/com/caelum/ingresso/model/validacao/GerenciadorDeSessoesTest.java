@@ -6,9 +6,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import br.com.caelum.ingresso.model.Filme;
 import br.com.caelum.ingresso.model.Sala;
@@ -26,7 +26,7 @@ public class GerenciadorDeSessoesTest {
 	private Sessao sessaoDasTreze;
 	private Sessao sessaoDasDezoito;
 	
-	@Before
+	@BeforeEach
 	public void preparaCenario() {
 		this.gs = new GerenciadorDeSessoes();
 		LocalTime horario = LocalTime.of(10,00);
@@ -47,13 +47,13 @@ public class GerenciadorDeSessoesTest {
 		boolean coube = this.gs.cabe(sessaoNova, sessoes);
 		
 		//Assercao
-		Assert.assertTrue(coube);
+		Assertions.assertTrue(coube);
 	}
 	
 	@Test
 	public void garanteQueNaoDevePermitirSessaoNoMesmoHorario() {
 		List<Sessao> sessoes = Arrays.asList(sessaoDasDez);
-		Assert.assertFalse(this.gs.cabe(sessaoDasDez, sessoes));
+		Assertions.assertFalse(this.gs.cabe(sessaoDasDez, sessoes));
 		
 	}
 	
@@ -61,19 +61,19 @@ public class GerenciadorDeSessoesTest {
 	public void garanteQueNaoDevePermitirSessoesTerminandoDentroDoHorarioDeUmaSessaoJaExistente() {
 		List<Sessao> sessoes = Arrays.asList(sessaoDasDez);
 		Sessao sessaoQueTerminaDentroDeUmaOutra = new Sessao(sessaoDasDez.getHorario().minusHours(1), filme, sala);
-		Assert.assertFalse(this.gs.cabe(sessaoQueTerminaDentroDeUmaOutra, sessoes));
+		Assertions.assertFalse(this.gs.cabe(sessaoQueTerminaDentroDeUmaOutra, sessoes));
 	}
 	
 	@Test
 	public void garanteQueNaoDevePermitirSessoesIniciandoDentroDoHorarioDeUmaSessaoJaExistente() {
 		List<Sessao> sessoes = Arrays.asList(sessaoDasDez);
 		Sessao sessaoQueComecaDentroDeUmaOutra = new Sessao(sessaoDasDez.getHorario().plusHours(1), filme, sala);
-		Assert.assertFalse(this.gs.cabe(sessaoQueComecaDentroDeUmaOutra, sessoes));
+		Assertions.assertFalse(this.gs.cabe(sessaoQueComecaDentroDeUmaOutra, sessoes));
 	}
 	@Test
 	public void garanteQueDevePermitirUmaInsercaoEntreDoisFilmes() {
 		List<Sessao> sessoes = Arrays.asList(sessaoDasDez, sessaoDasDezoito);
-		Assert.assertTrue(this.gs.cabe(sessaoDasTreze, sessoes));
+		Assertions.assertTrue(this.gs.cabe(sessaoDasTreze, sessoes));
 	}
 
 }
