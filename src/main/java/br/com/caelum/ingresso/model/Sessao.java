@@ -1,5 +1,6 @@
 package br.com.caelum.ingresso.model;
 
+import java.math.BigDecimal;
 import java.time.LocalTime;
 
 import javax.persistence.Entity;
@@ -65,6 +66,9 @@ public class Sessao {
 		return this.horario.plusMinutes(filme.getDuracao().toMinutes());
 	}
 	
+	public BigDecimal getPreco() {
+		return sala.getPreco().add(filme.getPreco());
+	}
 	
 
 }
