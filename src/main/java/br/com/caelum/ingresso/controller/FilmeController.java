@@ -30,7 +30,7 @@ public class FilmeController {
 
     @Autowired
     private FilmeDao filmeDao;
-    
+
     @Autowired
     private SessaoDao sessaoDao;
     
@@ -39,11 +39,11 @@ public class FilmeController {
 
 
     @GetMapping({"/admin/filme", "/admin/filme/{id}"})
-    public ModelAndView form(@PathVariable("id") Optional<Integer> id, Filme filme){
+    public ModelAndView form(@PathVariable("id") Optional<Integer> id, Filme filme) {
 
         ModelAndView modelAndView = new ModelAndView("filme/filme");
 
-        if (id.isPresent()){
+        if (id.isPresent()) {
             filme = filmeDao.findOne(id.get());
         }
 
@@ -55,7 +55,7 @@ public class FilmeController {
 
     @PostMapping("/admin/filme")
     @Transactional
-    public ModelAndView salva(@Valid Filme filme, BindingResult result){
+    public ModelAndView salva(@Valid Filme filme, BindingResult result) {
 
         if (result.hasErrors()) {
             return form(Optional.ofNullable(filme.getId()), filme);
@@ -69,8 +69,8 @@ public class FilmeController {
     }
 
 
-    @GetMapping(value="/admin/filmes")
-    public ModelAndView lista(){
+    @GetMapping(value = "/admin/filmes")
+    public ModelAndView lista() {
 
         ModelAndView modelAndView = new ModelAndView("filme/lista");
 
@@ -78,9 +78,9 @@ public class FilmeController {
 
         return modelAndView;
     }
-    
-    @GetMapping(value="/filme/em-cartaz")
-    public ModelAndView listarEmCartaz(){
+
+    @GetMapping(value = "/filme/em-cartaz")
+    public ModelAndView listarEmCartaz() {
 
         ModelAndView modelAndView = new ModelAndView("filme/em-cartaz");
 
@@ -88,9 +88,9 @@ public class FilmeController {
 
         return modelAndView;
     }
-    
-    @GetMapping(value="/filme/{id}/detalhe")
-    public ModelAndView detalheFilmeEmCartaz(@PathVariable("id") Integer filmeId){
+
+    @GetMapping(value = "/filme/{id}/detalhe")
+    public ModelAndView detalheFilmeEmCartaz(@PathVariable("id") Integer filmeId) {
 
         ModelAndView modelAndView = new ModelAndView("filme/detalhe");
         
@@ -111,7 +111,7 @@ public class FilmeController {
     @DeleteMapping("/admin/filme/{id}")
     @ResponseBody
     @Transactional
-    public void delete(@PathVariable("id") Integer id){
+    public void delete(@PathVariable("id") Integer id) {
         filmeDao.delete(id);
     }
 
