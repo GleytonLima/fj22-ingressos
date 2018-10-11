@@ -17,7 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.caelum.ingresso.dao.FilmeDao;
 import br.com.caelum.ingresso.dao.SessaoDao;
+import br.com.caelum.ingresso.model.DetalhesDoFilme;
 import br.com.caelum.ingresso.model.Filme;
+import br.com.caelum.ingresso.service.OmdbService;
 
 /**
  * Created by nando on 03/03/17.
@@ -31,6 +33,9 @@ public class FilmeController {
     
     @Autowired
     private SessaoDao sessaoDao;
+    
+    @Autowired
+    private OmdbService omdbService;
 
 
     @GetMapping({"/admin/filme", "/admin/filme/{id}"})
@@ -88,8 +93,16 @@ public class FilmeController {
     public ModelAndView detalheFilmeEmCartaz(@PathVariable("id") Integer filmeId){
 
         ModelAndView modelAndView = new ModelAndView("filme/detalhe");
+        
+        Filme filme = filmeDao.findOne(filmeId);
+        
+        Optional<DetalhesDoFilme> optional = this.omdbService.fazRequisicao(filme);
+        
+        DetalhesDoFilme detalhes = optional.orElse(new DetalhesDoFilme());
+
 
         modelAndView.addObject("sessoes", sessaoDao.findAllByFilmeId(filmeId));
+        modelAndView.addObject("detalhes", detalhes);
 
         return modelAndView;
     }
